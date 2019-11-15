@@ -39,5 +39,6 @@ blocks:
       jobs:
         - name: test cache restore
           commands:
+            - checkout
             - cache restore
             - pip install -r requirements.txt
