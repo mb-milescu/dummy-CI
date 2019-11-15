@@ -1,0 +1,32 @@
+version: v1.0
+name: Initial Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: 'Block #1'
+    task:
+      jobs:
+        - name: build+deploy
+          commands:
+            - checkout
+            - 'export TRAVIS_BRANCH=${SEMAPHORE_GIT_BRANCH}'
+            - export DOCKER_TAG=$(echo $TRAVIS_BRANCH | tr //. _)
+            - sudo rm /usr/local/bin/docker-compose
+            - >-
+              curl -L
+              https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
+            - '-s`-`uname -m` > docker-compose'
+            - chmod +x docker-compose
+            - sudo mv docker-compose /usr/local/bin
+            - chmod +x ./scripts/build.sh
+            - chmod +x ./scripts/deploy.sh
+            - gem install kontena-cli -v 1.5
+            - 'docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"'
+            - pip3 install requests
+            - ./scripts/build.sh && ./scripts/deploy.sh
+      agent:
+        machine:
+          type: e1-standard-2
+          os_image: ubuntu1804
