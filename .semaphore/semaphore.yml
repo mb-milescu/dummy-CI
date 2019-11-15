@@ -17,12 +17,12 @@ blocks:
             - sudo rm ${dockercompose}
             - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
             - chmod +x docker-compose
-            - sudo mv docker-compose /usr/local/bin
+            - sudo mv docker-compose ${dockercompose}
             - chmod +x ./scripts/build.sh
             - chmod +x ./scripts/deploy.sh
-            - gem install kontena-cli -v 1.5
+            - gem install kontena-cli -v 1.5 --no-ri --no-rdoc
             - docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
-            - pip3 install requests
+            - pip3 install --upgrade requests --user
             - ./scripts/build.sh && ./scripts/deploy.sh
       env_vars:
         - name: DOCKER_COMPOSE_VERSION
