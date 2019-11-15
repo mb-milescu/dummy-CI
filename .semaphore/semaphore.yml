@@ -13,8 +13,8 @@ blocks:
             - checkout
             - export TRAVIS_BRANCH=${SEMAPHORE_GIT_BRANCH}
             - export DOCKER_TAG=$(echo $TRAVIS_BRANCH | tr //. _)
-            - docker-compose=$(which docker-compose)
-            - sudo rm ${docker-compose}
+            - dockercompose=$(which docker-compose)
+            - sudo rm ${dockercompose}
             - >-
               curl -L
               https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname'-s`-`uname -m` > docker-compose'
