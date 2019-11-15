@@ -29,12 +29,15 @@ blocks:
             - gem install kontena-cli -v 1.5 --no-ri --no-rdoc
             - docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
             - ./scripts/build.sh && ./scripts/deploy.sh
-        - name: test cache restore
-          commands:
-            - cache restore
-            - pip install -r requirements.txt --user
       env_vars:
         - name: DOCKER_COMPOSE_VERSION
           value: "1.24.1"
       secrets:
         - name: docker_hub
+  - name: Test cache
+    task:
+      jobs:
+        - name: test cache restore
+          commands:
+            - cache restore
+            - pip install -r requirements.txt
