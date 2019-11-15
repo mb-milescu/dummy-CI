@@ -15,7 +15,7 @@ blocks:
             - cache clear
             - cache list
             - sem-version python 3.7
-            - pip install -r requirements.txt --user
+            - pip install -r requirements.txt
             - cache store
             - export TRAVIS_BRANCH=${SEMAPHORE_GIT_BRANCH}
             - export DOCKER_TAG=$(echo $TRAVIS_BRANCH | tr //. _) && echo ${DOCKER_TAG}
@@ -28,7 +28,6 @@ blocks:
             - chmod +x ./scripts/deploy.sh
             - gem install kontena-cli -v 1.5 --no-ri --no-rdoc
             - docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
-            - pip3 install --upgrade requests --user
             - ./scripts/build.sh && ./scripts/deploy.sh
         - name: test cache restore
           commands:
