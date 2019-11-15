@@ -17,7 +17,7 @@ blocks:
             - sudo rm ${dockercompose}
             - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
             - chmod +x docker-compose
-            - sudo mv docker-compose ${dockercompose}
+            - sudo mv docker-compose ${dockercompose} $$ docker-compose -v
             - chmod +x ./scripts/build.sh
             - chmod +x ./scripts/deploy.sh
             - gem install kontena-cli -v 1.5 --no-ri --no-rdoc
