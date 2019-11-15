@@ -40,5 +40,6 @@ blocks:
         - name: test cache restore
           commands:
             - checkout
+            - sem-version python 3.7
             - cache restore
             - pip install -r requirements.txt
