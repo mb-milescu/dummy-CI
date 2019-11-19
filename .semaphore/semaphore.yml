@@ -11,6 +11,7 @@ blocks:
         - name: build+deploy
           commands:
             - checkout
+            - sem-service start elasticsearch
             - cache list
             - cache clear
             - cache list
