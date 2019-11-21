@@ -8,7 +8,7 @@ blocks:
   - name: Build&Deploy
     task:
       secrets:
-        - name: test_secrert
+        - name: test_secret
       jobs:
         - name: build+deploy
           commands:
