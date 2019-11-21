@@ -7,7 +7,7 @@ agent:
 blocks:
   - name: Build&Deploy
     task:
-      secret:
+      secrets:
         - name: test_secrert
       jobs:
         - name: build+deploy
