@@ -7,9 +7,12 @@ agent:
 blocks:
   - name: Build&Deploy
     task:
+      secret:
+        - name: test_secrert
       jobs:
         - name: build+deploy
           commands:
+            - echo "${SECRET}"
             - checkout
             - sem-service start elasticsearch
             - cache list
