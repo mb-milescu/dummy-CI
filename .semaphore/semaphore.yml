@@ -12,8 +12,7 @@ blocks:
           commands:
             - chromedriver -v
             - export chromedriver_path=$(which chromedriver)
-            - rm -rf ${chromedriver_path}
-            - echo ${chromedriver_path}
+            - sudo rm -rf ${chromedriver_path}
             - wget https://chromedriver.storage.googleapis.com/79.0.3945.36/chromedriver_linux64.zip
             - unzip chromedriver_linux64.zip
             - sudo mv chromedriver ${chromedriver_path} && sudo chmod +x ${chromedriver_path}
