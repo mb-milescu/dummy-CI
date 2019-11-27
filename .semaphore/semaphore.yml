@@ -5,47 +5,14 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: Build&Deploy
-    task:
-      secrets:
-        - name: test_secret
-      jobs:
-        - name: build+deploy
-          commands:
-            - echo "${SECRET}"
-            - checkout
-            - sem-service start elasticsearch
-            - cache list
-            - cache clear
-            - cache list
-            - sem-version python 3.7
-            - pip install --cache-dir .pip_cache -r requirements.txt
-            - cache store
-            - export TRAVIS_BRANCH=${SEMAPHORE_GIT_BRANCH}
-            - export DOCKER_TAG=$(echo $TRAVIS_BRANCH | tr //. _) && echo ${DOCKER_TAG}
-            - dockercompose=$(which docker-compose)
-            - sudo rm ${dockercompose}
-            - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-            - chmod +x docker-compose
-            - sudo mv docker-compose ${dockercompose} && docker-compose -v
-            - chmod +x ./scripts/build.sh
-            - chmod +x ./scripts/deploy.sh
-            - gem install kontena-cli -v 1.5 --no-ri --no-rdoc
-            - docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
-            - ./scripts/build.sh && ./scripts/deploy.sh
-            - sleep 60
-      env_vars:
-        - name: DOCKER_COMPOSE_VERSION
-          value: "1.24.1"
-      secrets:
-        - name: docker_hub
-  - name: Test cache
+  - name: __test_chrome
     task:
       jobs:
-        - name: test cache restore
+        - name: chromedriver+chrome
           commands:
-            - checkout
-            - sem-version python 3.7
-            - cache restore
-            - pip freeze
-            - sleep 60
+            - chromedriver -v
+            - wget https://chromedriver.storage.googleapis.com/79.0.3945.36/chromedriver_linux64.zip
+            - unzip chromedriver_linux64.zip
+            - sudo mv chromedriver /usr/bin && sudo chmod +x /usr/bin/chromedriver
+            - chromedriver -v
+            
