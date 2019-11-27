@@ -19,7 +19,11 @@ blocks:
             - unzip chromedriver_linux64.zip
             - sudo mv chromedriver ${chromedriver_path} && sudo chmod +x ${chromedriver_path}
             - chromedriver -v
+            - echo "Removing installed google chrome..."
+            - google-chrome --version
+            - sudo apt remove -y google-chrome-stable
             - echo "Chrome installation..."
             - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-            - sudo apt install ./google-chrome-stable_current_amd64.deb
+            - sudo apt install -y ./google-chrome-stable_current_amd64.deb
+            - google-chrome --version
             
