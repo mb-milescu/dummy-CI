@@ -10,11 +10,16 @@ blocks:
       jobs:
         - name: chromedriver+chrome
           commands:
+            - echo "Removing installed chromedriver ..."
             - chromedriver -v
             - export chromedriver_path=$(which chromedriver)
             - sudo rm -rf ${chromedriver_path}
+            - echo "Chromedriver installation..."
             - wget https://chromedriver.storage.googleapis.com/79.0.3945.36/chromedriver_linux64.zip
             - unzip chromedriver_linux64.zip
             - sudo mv chromedriver ${chromedriver_path} && sudo chmod +x ${chromedriver_path}
             - chromedriver -v
+            - echo "Chrome installation..."
+            - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            - sudo apt install ./google-chrome-stable_current_amd64.deb
             
