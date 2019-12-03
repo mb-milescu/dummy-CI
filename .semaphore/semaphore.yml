@@ -17,6 +17,6 @@ blocks:
             - echo "Deleting local files..."
             - rm -rf ./path
             - echo "Pulling artifact..."
-            - artifact pull /path/to/artifact --destination ./path/to/localfile
+            - artifact pull project /path/to/artifact --destination ./path/to/localfile
             - ls -la ./path/to/localfile
             
