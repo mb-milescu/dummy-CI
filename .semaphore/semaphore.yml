@@ -13,10 +13,10 @@ blocks:
             - echo "Pushing artifact..."
             - mkdir -p ./path/to/
             - touch ./path/to/localfile
-            - artifact push project ./path/to/localfile --destination /path/to/artifact --force
+            - artifact push workflow ./path/to/localfile --destination /path/to/artifact --force
             - echo "Deleting local files..."
             - rm -rf ./path
             - echo "Pulling artifact..."
-            - artifact pull project /path/to/artifact
+            - artifact pull workflow /path/to/artifact
             - ls -la ./path/to/artifact
             
