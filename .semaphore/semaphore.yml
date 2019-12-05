@@ -18,5 +18,5 @@ blocks:
             - rm -rf ./path
             - echo "Pulling artifact..."
             - artifact pull workflow /path/to/artifact
-            - ls -la .artifact
+            - ls -la
             
