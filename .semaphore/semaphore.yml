@@ -1,0 +1,24 @@
+version: v1.0
+name: Initial Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: __test_push_pull
+    task:
+      jobs:
+        - name: push+pull
+          commands:
+            - echo "Pushing artifact..."
+            - mkdir -p ./path/to/
+            - touch ./path/to/localfile
+            - artifact push workflow ./path/to/localfile --destination /path/to/artifact --force
+            - echo "Deleting local files..."
+            - rm -rf ./path
+            - echo "Pulling artifact..."
+            - artifact pull workflow /path/to/artifact
+            - ls artifact
+            - echo ${SEMAPHORE_GIT_BRANCH}
+            - echo ${SEMAPHORE_GIT_SHA}
+            
