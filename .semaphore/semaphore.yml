@@ -19,4 +19,6 @@ blocks:
             - echo "Pulling artifact..."
             - artifact pull workflow /path/to/artifact
             - ls artifact
+            - echo ${SEMAPHORE_GIT_BRANCH}
+            - echo ${SEMAPHORE_GIT_SHA}
             
