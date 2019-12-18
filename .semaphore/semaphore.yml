@@ -4,21 +4,19 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+  containers:
+    - name: main
+      image: semaphoreci/ruby:2.6.3
+
 blocks:
-  - name: __test_push_pull
+  - name: __test
+    dependencies: []
     task:
       jobs:
-        - name: push+pull
+        - name: test
+          parallelism: 10
           commands:
-            - echo "Pushing artifact..."
-            - mkdir -p ./path/to/
-            - touch ./path/to/localfile
-            - artifact push workflow ./path/to/localfile --destination /path/to/artifact --force
-            - echo "Deleting local files..."
-            - rm -rf ./path
-            - echo "Pulling artifact..."
-            - artifact pull workflow /path/to/artifact
-            - ls artifact
-            - echo ${SEMAPHORE_GIT_BRANCH}
-            - echo ${SEMAPHORE_GIT_SHA}
+            - checkout
+            - gem install semaphore_test_boosters
+            - echo "This is job $SEMAPHORE_JOB_INDEX/$SEMAPHORE_JOB_COUNT"
             
